@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+
+  /* purple + maroon palette */
+  --color-cream: #fcf7fd;
+  --color-lilac: #f5e6f7;
+  --color-orchid: #d9a7e0;
+  --color-plum: #9d4b8f;
+  --color-maroon: #4a1533;
+  --color-wine: #6b1f45;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+  font-family: var(--font-sans);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(217, 167, 224, 0.22), transparent 42%),
+    radial-gradient(circle at 88% 22%, rgba(157, 75, 143, 0.14), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(74, 21, 51, 0.1), transparent 55%);
+  background-attachment: fixed;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* aesthetic helpers */
+.gradient-text {
+  background: linear-gradient(100deg, #4a1533 0%, #9d4b8f 55%, #d9a7e0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(217, 167, 224, 0.45);
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-floaty { animation: floaty 6s ease-in-out infinite; }
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 26s linear infinite; }
+
+/* hide scrollbar for carousels */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+/* iPhone/mobile overflow guard */
+*, *::before, *::after { box-sizing: border-box; }
+img, video, iframe { max-width: 100%; }
+
+@media (max-width: 639px) {
+  body { overflow-x: clip; }
+  section, main, header, footer { max-width: 100%; }
+}
+
+
+/* Mobile/iPhone layout guard */
+html, body {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 639px) {
+  #gallery {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+  #gallery > div {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+
+/* Stable mobile-safe floating WhatsApp button */
+.floating-contact {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #4A1533;
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(74,21,51,.35);
+  z-index: 2147483000;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.floating-contact svg { width: 23px; height: 23px; }
+.floating-contact:hover { transform: translateZ(0) scale(1.04); }
+@media (max-width: 639px) {
+  .floating-contact {
+    width: 46px;
+    height: 46px;
+    right: max(10px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .floating-contact svg { width: 20px; height: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-contact { transition: none; }
+}
+
+
+/* High-contrast CTA buttons */
+a[href="#book"] {
+  background: #111111 !important;
+  color: #ffffff !important;
+  border-color: #111111 !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+@media (max-width: 639px) {
+  a[href="#book"], a[href*="maps/dir"] {
+    background: #111111 !important;
+    color: #ffffff !important;
+    border-color: #111111 !important;
+    -webkit-text-fill-color: #ffffff;
+    text-shadow: none;
+  }
+  a[href="#book"]:hover, a[href*="maps/dir"]:hover,
+  a[href="#book"]:active, a[href*="maps/dir"]:active {
+    background: #2a2a2a !important;
+    color: #ffffff !important;
+  }
+}
